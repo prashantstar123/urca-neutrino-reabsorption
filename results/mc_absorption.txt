@@ -1,0 +1,14 @@
+calibration at open threshold, E=3 MeV, T=3: MC integral 4.1986e+11 +- 0.2%  -> K fixed to RPL98 (147s)
+  open threshold E=  10: MC/RPL98 = 0.9821 (+-0.2%), kernel/RPL98 = 0.9744, MC/kernel = 1.0080
+  open threshold E=  30: MC/RPL98 = 0.9340 (+-0.1%), kernel/RPL98 = 0.9286, MC/kernel = 1.0058
+  open threshold E=  60: MC/RPL98 = 0.7698 (+-0.1%), kernel/RPL98 = 0.8710, MC/kernel = 0.8839
+DD2 2 n0 nucleonic: pFn 395.0 pFp 183.5 pFe 162.5 (dp = +49.0 MeV), m*_n 355.5 m*_p 354.2
+  T=  2 E=  10 MeV: lambda_MC =  1.78e+07 m (+-2%)   lambda_kernel =  1.14e+08 m   MC/kernel = 6.411  [234s]
+  T=  2 E=  20 MeV: lambda_MC =        32 m (+-1%)   lambda_kernel =      35.1 m   MC/kernel = 1.095  [206s]
+  T=  2 E=  30 MeV: lambda_MC =      2.28 m (+-0%)   lambda_kernel =      2.34 m   MC/kernel = 1.027  [173s]
+  T=  3 E=  10 MeV: lambda_MC =  1.68e+05 m (+-1%)   lambda_kernel =  6.38e+05 m   MC/kernel = 3.798  [135s]
+  T=  3 E=  20 MeV: lambda_MC =      24.3 m (+-1%)   lambda_kernel =      26.7 m   MC/kernel = 1.101  [138s]
+  T=  3 E=  30 MeV: lambda_MC =      2.19 m (+-0%)   lambda_kernel =      2.25 m   MC/kernel = 1.029  [138s]
+  T=  5 E=  10 MeV: lambda_MC =   2.4e+03 m (+-0%)   lambda_kernel =   5.9e+03 m   MC/kernel = 2.461  [130s]
+  T=  5 E=  20 MeV: lambda_MC =      13.8 m (+-0%)   lambda_kernel =      15.4 m   MC/kernel = 1.116  [97s]
+  T=  5 E=  30 MeV: lambda_MC =      1.92 m (+-0%)   lambda_kernel =      1.99 m   MC/kernel = 1.037  [118s]

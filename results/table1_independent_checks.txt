@@ -1,0 +1,20 @@
+Table I independent coverage, 1 kHz, 10-km mode, tau in s. (A) project model; (B) round-5 referee exact-dispersion kernel + angular solver (orders 180 / 300); (C) combined (mU,dU,NC) mesh range with the project kernel (13x5x9). dp = p_Fn - p_Fp - p_Fe [MeV]; flag = kernel-limited if dp < 20 MeV (excluded from unqualified tables), near-threshold if 20 <= dp < 30 MeV (pointwise exact-kernel validation required, no percentage guarantee). Discrepancy (B)/(A) - 1 at the checked states: IUFSU 3n0 dp 14.4: +0.7 % (3 MeV) but -68.8 % (5 MeV); BigApple 3n0 dp 8.0: -96.1 %; DD2 4n0 cold dp 24.9: -21.6 % (= project 27.5 % above exact); IUFSU 2.5n0 dp 26.8: +2.8 %; DD2 3n0 hot dp 33.7: +1.7 %. The gap alone does not set the error.
+ eos      n/n0  T  comp |  dp   | tau_AH   | (A) project | (B) exact180  exact300 | (B)/(A)  | (C) range min   max   | flag
+ DD2       0.5 3.0 hot  | +89.4 |  0.00749 |    0.635876 |     0.636688  0.636687 |  1.00128 |    0.4103     1.059 | 
+ DD2       1.0 4.0 hot  | +73.8 |   0.0211 |     2.81712 |      2.86661   2.86661 |  1.01757 |     1.854     5.345 | 
+ DD2       1.5 4.0 hot  | +60.1 |   0.0686 |     7.17786 |      7.25273   7.25275 |  1.01043 |     4.955     12.76 | 
+ DD2       2.0 5.0 hot  | +49.0 |   0.0962 |     15.8764 |      16.2389   16.2389 |  1.02283 |      9.74     33.53 | 
+ DD2       3.0 5.0 hot  | +33.7 |    0.285 |     57.8257 |      58.9829   58.9824 |  1.02000 |     36.04     122.9 | 
+ IUFSU     0.5 3.0 cold | +73.9 |  0.00576 |    0.802578 |     0.812974  0.812966 |  1.01294 |    0.5292     1.478 | 
+ IUFSU     1.0 4.0 cold | +73.6 |   0.0175 |     3.71192 |       3.8021   3.80209 |  1.02429 |     2.328     7.499 | 
+ IUFSU     1.5 4.0 cold | +61.1 |   0.0185 |      2.7888 |      2.82592   2.82593 |  1.01331 |     1.894     5.287 | 
+ IUFSU     2.0 5.0 cold | +43.0 |   0.0191 |     4.32865 |      4.50213   4.50213 |  1.04008 |     2.504     9.441 | 
+ IUFSU     3.0 5.0 cold | +14.4 |    0.165 |     17.5857 |      18.0538   18.0538 |  1.02662 |     10.16     38.55 | kernel-limited
+ BigApple  0.5 3.0 cold | +65.3 |  0.00263 |     0.38277 |     0.388814  0.388807 |  1.01577 |    0.2345    0.7497 | 
+ BigApple  1.0 4.0 cold | +72.1 |   0.0481 |     10.3293 |      10.5954   10.5954 |  1.02577 |     6.428     20.97 | 
+ BigApple  1.5 4.0 cold | +61.9 |   0.0255 |     2.59409 |      2.61637   2.61638 |  1.00859 |     1.793      4.64 | 
+ BigApple  2.0 5.0 cold | +36.9 |   0.0206 |     4.05309 |      4.19126   4.19133 |  1.03411 |     2.611     8.261 | 
+ BigApple  3.0 5.0 cold |  +8.0 |    0.913 |     63.5672 |      64.2203     64.22 |  1.01027 |     41.06     129.6 | kernel-limited
+ DD2       4.0 5.0 cold | +24.9 |     1.34 |     179.187 |      182.854   182.859 |  1.02050 |     107.7     394.2 | near-threshold
+ IUFSU     3.0 3.0 cold | +14.4 |   0.0318 |     18.3614 |      18.4877   18.4878 |  1.00688 |     12.13     35.25 | kernel-limited
+ IUFSU     2.5 4.0 cold | +26.8 |   0.0196 |     6.57115 |       6.7554    6.7555 |  1.02805 |      4.67     11.74 | near-threshold
