@@ -1,0 +1,45 @@
+runtime 219 s
+S4 bounds: 1800 points, violations 0; Re/Lam_inf in [9.688e-09, 0.3325], max Im/|Lam| -1.755e-04, min tau/tau_res 1.003
+S4 long wavelength L = 10.0 km: P1 max dev 4.91%, leading-order max dev 92.43%, diffusion share 0.954-0.988
+S4 long wavelength L = 20.0 km: P1 max dev 4.03%, leading-order max dev 81.63%, diffusion share 0.837-0.953
+S4 long wavelength L = 50.0 km: P1 max dev 1.63%, leading-order max dev 62.71%, diffusion share 0.451-0.765
+S4 0.5n0/3: angular quadrature 96 nodes rel tau -1.97e-14, 400 nodes 5.51e-14; diffusion share at 10 km 0.980; P1 dev at 10 km -4.91%; B chi 3.289e-03
+S4 1n0/4: angular quadrature 96 nodes rel tau -8.99e-14, 400 nodes 1.23e-13; diffusion share at 10 km 0.984; P1 dev at 10 km -2.94%; B chi 2.708e-03
+S4 1.5n0/4: angular quadrature 96 nodes rel tau -1.04e-13, 400 nodes 1.12e-13; diffusion share at 10 km 0.981; P1 dev at 10 km -2.50%; B chi 1.923e-03
+S4 2n0/5: angular quadrature 96 nodes rel tau -1.86e-13, 400 nodes 6.77e-13; diffusion share at 10 km 0.982; P1 dev at 10 km -0.92%; B chi 2.438e-03
+S4 3n0/5: angular quadrature 96 nodes rel tau -8.09e-13, 400 nodes 6.26e-13; diffusion share at 10 km 0.980; P1 dev at 10 km -0.60%; B chi 1.855e-03
+S4 grid 0.5n0/3: tau 128/50T 0.48118, 256/70T 0.48118, rel +1.17e-06
+S4 grid 1n0/4: tau 128/50T 2.74458, 256/70T 2.74457, rel -2.58e-07
+S4 grid 1.5n0/4: tau 128/50T 8.64799, 256/70T 8.64792, rel -8.28e-06
+S4 grid 2n0/5: tau 128/50T 22.8603, 256/70T 22.8603, rel +8.52e-07
+S4 grid 3n0/5: tau 128/50T 96.6775, 256/70T 96.6775, rel +2.58e-07
+S6 0.5n0/3: central 0.4812, mU_x1/3 0.6364, mU_x3 0.4388, dU_x1/2 0.4742, dU_x2 0.4902, NC_x1/2 0.3674, NC_x2 0.6764 | mesh 0.3187 at [2.498, 0.5, 0.5] - 0.858 at [0.333, 0.5, 2.0]
+S6 1n0/4: central 2.745, mU_x1/3 2.922, mU_x3 3.362, dU_x1/2 2.659, dU_x2 2.864, NC_x1/2 1.876, NC_x2 4.329 | mesh 1.794 at [0.833, 0.5, 0.5] - 5.204 at [3.0, 2.0, 2.0]
+S6 1.5n0/4: central 8.648, mU_x1/3 9.792, mU_x3 10.07, dU_x1/2 8.518, dU_x2 8.812, NC_x1/2 5.742, NC_x2 14.05 | mesh 5.632 at [1.0, 0.5, 0.5] - 15.88 at [3.0, 2.0, 2.0]
+S6 2n0/5: central 22.86, mU_x1/3 21.75, mU_x3 29.88, dU_x1/2 22.34, dU_x2 23.45, NC_x1/2 14.38, NC_x2 38.91 | mesh 13 at [0.481, 0.5, 0.5] - 47.77 at [3.0, 2.0, 2.0]
+S6 3n0/5: central 96.68, mU_x1/3 91.39, mU_x3 124.6, dU_x1/2 94.5, dU_x2 98.77, NC_x1/2 59.62, NC_x2 167.3 | mesh 53.98 at [0.481, 0.5, 0.5] - 202.4 at [3.0, 2.0, 2.0]
+S6 tr 0.5n0/3 dU x1 mU x1: Ye* 0.02510 tau_tr 13.34 ms
+S6 tr 0.5n0/3 dU x1 mU x0.333: Ye* 0.02341 tau_tr 19.48 ms
+S6 tr 0.5n0/3 dU x1 mU x3: Ye* 0.02725 tau_tr 8.871 ms
+S6 tr 0.5n0/3 dU x0.5 mU x1: Ye* 0.02642 tau_tr 18.89 ms
+S6 tr 0.5n0/3 dU x2 mU x1: Ye* 0.02396 tau_tr 9.562 ms
+S6 tr 1n0/4 dU x1 mU x1: Ye* 0.04029 tau_tr 19.4 ms
+S6 tr 1n0/4 dU x1 mU x0.333: Ye* 0.03752 tau_tr 28.59 ms
+S6 tr 1n0/4 dU x1 mU x3: Ye* 0.04318 tau_tr 16.81 ms
+S6 tr 1n0/4 dU x0.5 mU x1: Ye* 0.04211 tau_tr 24.7 ms
+S6 tr 1n0/4 dU x2 mU x1: Ye* 0.03852 tau_tr 16.51 ms
+S6 tr 1.5n0/4 dU x1 mU x1: Ye* 0.04881 tau_tr 70.24 ms
+S6 tr 1.5n0/4 dU x1 mU x0.333: Ye* 0.04622 tau_tr 116.5 ms
+S6 tr 1.5n0/4 dU x1 mU x3: Ye* 0.05138 tau_tr 48.04 ms
+S6 tr 1.5n0/4 dU x0.5 mU x1: Ye* 0.05044 tau_tr 95.12 ms
+S6 tr 1.5n0/4 dU x2 mU x1: Ye* 0.04717 tau_tr 53.41 ms
+S6 tr 2n0/5 dU x1 mU x1: Ye* 0.05198 tau_tr 69.7 ms
+S6 tr 2n0/5 dU x1 mU x0.333: Ye* 0.04912 tau_tr 82.55 ms
+S6 tr 2n0/5 dU x1 mU x3: Ye* 0.05485 tau_tr 85.9 ms
+S6 tr 2n0/5 dU x0.5 mU x1: Ye* 0.05379 tau_tr 77.8 ms
+S6 tr 2n0/5 dU x2 mU x1: Ye* 0.05018 tau_tr 68.11 ms
+S6 tr 3n0/5 dU x1 mU x1: Ye* 0.05873 tau_tr 197.5 ms
+S6 tr 3n0/5 dU x1 mU x0.333: Ye* 0.05625 tau_tr 250.2 ms
+S6 tr 3n0/5 dU x1 mU x3: Ye* 0.06121 tau_tr 228.9 ms
+S6 tr 3n0/5 dU x0.5 mU x1: Ye* 0.06029 tau_tr 228.4 ms
+S6 tr 3n0/5 dU x2 mU x1: Ye* 0.05716 tau_tr 184.7 ms

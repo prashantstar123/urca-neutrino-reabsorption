@@ -1,9 +1,0 @@
-DD2 1.0 n0 T=2: cold       Ye 0.0507 dp  +73.8 dmu +0.00 | <E>  22.4 MeV  lambda_h     6.66 m  P_esc(5 km) 0.0097 || beta-eq(T) Ye 0.0509 dp  +73.3 dmu -0.00 | <E>  22.3 MeV  lambda_h     6.65 m  P_esc(5 km) 0.0097
-DD2 1.0 n0 T=3: cold       Ye 0.0507 dp  +73.8 dmu +0.00 | <E>  25.8 MeV  lambda_h     2.62 m  P_esc(5 km) 0.0023 || beta-eq(T) Ye 0.0512 dp  +72.6 dmu -0.00 | <E>  25.6 MeV  lambda_h     2.62 m  P_esc(5 km) 0.0022
-DD2 1.0 n0 T=5: cold       Ye 0.0507 dp  +73.8 dmu +0.00 | <E>  33.0 MeV  lambda_h    0.878 m  P_esc(5 km) 0.0000 || beta-eq(T) Ye 0.0522 dp  +70.3 dmu +0.00 | <E>  32.5 MeV  lambda_h    0.874 m  P_esc(5 km) 0.0000
-DD2 2.0 n0 T=2: cold       Ye 0.0633 dp  +49.0 dmu +0.00 | <E>  23.4 MeV  lambda_h      6.6 m  P_esc(5 km) 0.0030 || beta-eq(T) Ye 0.0634 dp  +48.8 dmu +0.00 | <E>  23.3 MeV  lambda_h      6.6 m  P_esc(5 km) 0.0030
-DD2 2.0 n0 T=3: cold       Ye 0.0633 dp  +49.0 dmu +0.00 | <E>  26.8 MeV  lambda_h     2.99 m  P_esc(5 km) 0.0008 || beta-eq(T) Ye 0.0635 dp  +48.6 dmu -0.00 | <E>  26.7 MeV  lambda_h     2.99 m  P_esc(5 km) 0.0008
-DD2 2.0 n0 T=5: cold       Ye 0.0633 dp  +49.0 dmu +0.00 | <E>  34.1 MeV  lambda_h     1.07 m  P_esc(5 km) 0.0001 || beta-eq(T) Ye 0.0637 dp  +47.9 dmu -0.00 | <E>  33.9 MeV  lambda_h     1.07 m  P_esc(5 km) 0.0001
-DD2 3.0 n0 T=2: cold       Ye 0.0694 dp  +33.7 dmu +0.00 | <E>  20.2 MeV  lambda_h     6.66 m  P_esc(5 km) 0.0005 || beta-eq(T) Ye 0.0694 dp  +33.6 dmu -0.00 | <E>  20.2 MeV  lambda_h     6.67 m  P_esc(5 km) 0.0005
-DD2 3.0 n0 T=3: cold       Ye 0.0694 dp  +33.7 dmu +0.00 | <E>  23.7 MeV  lambda_h     3.15 m  P_esc(5 km) 0.0002 || beta-eq(T) Ye 0.0695 dp  +33.5 dmu -0.00 | <E>  23.7 MeV  lambda_h     3.15 m  P_esc(5 km) 0.0002
-DD2 3.0 n0 T=5: cold       Ye 0.0694 dp  +33.7 dmu +0.00 | <E>  31.3 MeV  lambda_h     1.14 m  P_esc(5 km) 0.0001 || beta-eq(T) Ye 0.0697 dp  +33.0 dmu -0.00 | <E>  31.2 MeV  lambda_h     1.14 m  P_esc(5 km) 0.0001

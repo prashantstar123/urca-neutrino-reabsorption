@@ -1,0 +1,9 @@
+runtime 85 s
+L = 10.0 km: truncated O(k^2) form max dev 65.33% (median 13.96%), non-positive 0; local share 0.0122-0.3256
+L = 20.0 km: truncated O(k^2) form max dev 48.02% (median 4.92%), non-positive 0; local share 0.0470-0.4752
+L = 50.0 km: truncated O(k^2) form max dev 15.80% (median 0.77%), non-positive 0; local share 0.2354-0.8119
+0.5n0/3: local share at 10 km 0.0391, 20 km 0.1006, 50 km 0.3627; trunc dev 10/20/50 km -46.53 -21.42 -3.65 %
+1n0/4: local share at 10 km 0.0195, 20 km 0.0651, 50 km 0.2927; trunc dev 10/20/50 km -17.39 -5.65 -0.78 %
+1.5n0/4: local share at 10 km 0.0241, 20 km 0.0787, 50 km 0.3349; trunc dev 10/20/50 km -19.19 -6.35 -0.86 %
+2n0/5: local share at 10 km 0.0192, 20 km 0.0699, 50 km 0.3168; trunc dev 10/20/50 km -5.46 -1.44 -0.17 %
+3n0/5: local share at 10 km 0.0205, 20 km 0.0751, 50 km 0.3343; trunc dev 10/20/50 km -4.26 -1.07 -0.13 %

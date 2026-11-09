@@ -26,8 +26,9 @@ def _prange(q, omega, mn, mp, mun, mup):
         plo = np.maximum(np.maximum(p1m, p2), 0.0); phi = np.where(ok, p1p, -1.0); return plo, phi
     A = -D; disc = b ** 2 + 4 * A * K; ok = disc >= 0; s = np.sqrt(np.where(ok, disc, 0.0))
     pa = np.where(K > 0, (-b + s) / (2 * A), 0.0); plo = np.maximum(np.maximum(pa, (b - s) / (2 * A)), 0.0); phi = np.where(ok, (b + s) / (2 * A), -1.0); return plo, phi
-def gamma_nd_2m(T, mstn, mstp, pFn, pFp, mue, dmu, trapped=False, ne=120, nn=80, nz=48, xmax=40.0):
+def gamma_nd_2m(T, mstn, mstp, pFn, pFp, mue, dmu, trapped=False, ne=120, nn=80, nz=48, xmax=40.0, refs=None):
     mn, mp = np.sqrt(pFn ** 2 + mstn ** 2), np.sqrt(pFp ** 2 + mstp ** 2); mun, mup = pFn ** 2 / (2 * mn), pFp ** 2 / (2 * mp); ae = mue / T
+    if refs is not None: mun, mup = refs   # density-consistent finite-T occupation references (fix round 2026-11-08)
     xe_g, xe_w = leggauss(ne); xn_g, xn_w = leggauss(nn); z_g, z_w = leggauss(nz)
     e_lo, e_hi = max(0.0, ae - xmax), ae + xmax; xe = e_lo + (e_hi - e_lo) * (xe_g + 1) / 2; we = xe_w * (e_hi - e_lo) / 2
     xn = xmax * (xn_g + 1) / 2; wn = xn_w * xmax / 2
@@ -89,10 +90,11 @@ def _lepton_grid(T, mue, ne, nn, xmax):
     e_lo, e_hi = max(0.0, ae - xmax), ae + xmax; xe = e_lo + (e_hi - e_lo) * (xe_g + 1) / 2; we = xe_w * (e_hi - e_lo) / 2
     xn = xmax * (xn_g + 1) / 2; wn = xn_w * xmax / 2
     XE, XN = np.meshgrid(xe, xn, indexing='ij'); WE, WN = np.meshgrid(we, wn, indexing='ij'); return ae, XE, XN, WE, WN
-def _rate_generic(T, mstn, mstp, pFn, pFp, mue, dmu, sign_nu, lepton_factor, ne=120, nn=80, nz=48, xmax=40.0):
+def _rate_generic(T, mstn, mstp, pFn, pFp, mue, dmu, sign_nu, lepton_factor, ne=120, nn=80, nz=48, xmax=40.0, refs=None):
     """sign_nu = +1: neutrino in the final state with the electron (decay kinematics, omega = E_e + E_nu - mu_e - dmu);
        sign_nu = -1: capture/absorption kinematics (omega' = E_e - E_nu - mu_e - dmu).  lepton_factor(XE, XN, ae, c) -> weight."""
     mn, mp = np.sqrt(pFn ** 2 + mstn ** 2), np.sqrt(pFp ** 2 + mstp ** 2); mun, mup = pFn ** 2 / (2 * mn), pFp ** 2 / (2 * mp)
+    if refs is not None: mun, mup = refs
     ae, XE, XN, WE, WN = _lepton_grid(T, mue, ne, nn, xmax); z_g, z_w = leggauss(nz)
     c = XE + sign_nu * XN - ae - dmu / T; omega = c * T; csafe = np.where(np.abs(c) < 1e-9, 1e-9, c); g = gB(csafe); block = lepton_factor(XE, XN, ae, c)
     zlo, zhi = np.abs(XE - XN), XE + XN; tot = np.zeros_like(XE)
@@ -124,9 +126,10 @@ def nu_mfp_km(T, Gamma):
 #     thermal-bath rate Gamma_abs = int dn_nu(E) W(E), dn_nu = T^3 x^2 f(x) dx/(2 pi^2)  ->  W(x) = G~^2 m_n m_p T^3/(4 pi^3 x) int dx_e dz x_e (1-f_e) g Lam
 #   mean free path lambda(E) = hbar c / W(E).  Emission spectra: dGamma_ec/dx_nu (capture nu_e), dGamma_nd/dx_nu (decay nubar_e), and the 3-body
 #   nubar absorption W_abs,nubar(E) (p + e + nubar -> n) with decay kinematics.
-def _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, sign_nu, lepton_factor_e, xnu, ne=160, nz=64, xmax=40.0):
+def _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, sign_nu, lepton_factor_e, xnu, ne=160, nz=64, xmax=40.0, refs=None):
     """int dx_e dz x_e lepton_factor_e(x_e) g(c) [Lam_hi - Lam_lo] at fixed x_nu (no x_nu weight)."""
     mn, mp = np.sqrt(pFn ** 2 + mstn ** 2), np.sqrt(pFp ** 2 + mstp ** 2); mun, mup = pFn ** 2 / (2 * mn), pFp ** 2 / (2 * mp); ae = mue / T
+    if refs is not None: mun, mup = refs
     xe_g, xe_w = leggauss(ne); e_lo, e_hi = max(0.0, ae - xmax), ae + xmax; xe = e_lo + (e_hi - e_lo) * (xe_g + 1) / 2; we = xe_w * (e_hi - e_lo) / 2
     z_g, z_w = leggauss(nz); c = xe + sign_nu * xnu - ae - dmu / T; omega = c * T; csafe = np.where(np.abs(c) < 1e-9, 1e-9, c); g = gB(csafe); block = lepton_factor_e(xe, ae, c)
     zlo, zhi = np.abs(xe - xnu), xe + xnu; tot = np.zeros_like(xe)
@@ -136,17 +139,37 @@ def _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, sign_nu, lepton_factor_
         xlo = (plo ** 2 / (2 * mn) - mun) / T; xhi = np.where(np.isfinite(phi), (np.maximum(phi, 0.0) ** 2 / (2 * mn) - mun) / T, 1e6)
         tot += wz * np.where(valid, _lam(xhi, c) - _lam(xlo, c), 0.0)
     return float(np.sum(we * xe * g * block * tot)), mn, mp
-def spectra(T, mstn, mstp, pFn, pFp, mue, dmu, xnus):
+def spectra(T, mstn, mstp, pFn, pFp, mue, dmu, xnus, refs=None):
     """returns dict of arrays over xnus: W_abs_nu [MeV], W_abs_nubar [MeV], dGec_dx, dGnd_dx [MeV^4 per unit x] ."""
     Wn, Wb, Sec, Snd = [], [], [], []
     for x in xnus:
-        k_abs, mn, mp = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, -1, lambda xe, ae, c: 1 - fF(xe - ae), x)
-        k_ec, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, -1, lambda xe, ae, c: fF(xe - ae) * np.exp(np.clip(c, -700, 700)), x)
-        k_nd, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, +1, lambda xe, ae, c: 1 - fF(xe - ae), x)
-        k_abb, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, +1, lambda xe, ae, c: fF(xe - ae) * np.exp(np.clip(c, -700, 700)), x)
+        k_abs, mn, mp = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, -1, lambda xe, ae, c: 1 - fF(xe - ae), x, refs=refs)
+        k_ec, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, -1, lambda xe, ae, c: fF(xe - ae) * np.exp(np.clip(c, -700, 700)), x, refs=refs)
+        k_nd, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, +1, lambda xe, ae, c: 1 - fF(xe - ae), x, refs=refs)
+        k_abb, _, _ = _kernel_fixed_xnu(T, mstn, mstp, pFn, pFp, mue, dmu, +1, lambda xe, ae, c: fF(xe - ae) * np.exp(np.clip(c, -700, 700)), x, refs=refs)
         pref = GT2 * mn * mp * T ** 6 / (8 * np.pi ** 5)
         Wn.append(GT2 * mn * mp * T ** 3 / (4 * np.pi ** 3 * x) * k_abs); Wb.append(GT2 * mn * mp * T ** 3 / (4 * np.pi ** 3 * x) * k_abb)
         Sec.append(pref * x * k_ec); Snd.append(pref * x * k_nd)
     return dict(W_abs_nu=np.array(Wn), W_abs_nubar=np.array(Wb), dGec=np.array(Sec), dGnd=np.array(Snd))
 HBARC = 197.3269804
 def mfp_of_W_km(W): return HBARC / np.maximum(W, 1e-300) * 1e-18
+
+# ---------------------------------------------------------------------------------------------------------------------------------
+# 2026-11-08 FIX ROUND: density-consistent finite-temperature occupation references.  Fixing the cold composition fixes the number densities,
+# not the occupation chemical potentials: with eps_j = p^2/(2 m_j) - mu_j (Landau mass m_j) the reference mu_j^T is solved such that the
+# two-spin Fermi-Dirac distribution at T integrates to the declared density n_j:  n_j (hbar c)^3 = (2 m_j T)^{3/2} F_{1/2}(mu_j^T/T)/(2 pi^2).
+# T -> 0 gives mu_j^T -> p_Fj^2/(2 m_j), the previous cold reference.  mu_j^T < 0 (nondegenerate protons at low density/high T) is legitimate.
+from scipy.optimize import brentq as _brentq
+from scipy.integrate import quad as _quad
+_HBARC = 197.3269804
+def F12(eta):
+    """complete Fermi-Dirac integral int_0^inf sqrt(x)/(exp(x - eta) + 1) dx"""
+    if eta < -35.0: return np.sqrt(np.pi) / 2 * np.exp(eta)
+    f = lambda x: np.sqrt(x) / (np.exp(min(x - eta, 700.0)) + 1.0)
+    up = max(eta, 0.0) + 70.0
+    return _quad(f, 0.0, up, points=[eta] if 0.0 < eta < up else None, limit=400, epsabs=0.0, epsrel=1e-13)[0]
+def occ_ref(T, mL, n_fm3):
+    """occupation reference chemical potential mu^T [MeV] of the parabolic dispersion p^2/(2 mL) at temperature T for density n [fm^-3]"""
+    target = 2 * np.pi ** 2 * n_fm3 * _HBARC ** 3 / (2 * mL * T) ** 1.5
+    eta = _brentq(lambda e: F12(e) - target, -60.0, 2.0e4, xtol=1e-13, rtol=1e-15, maxiter=500)
+    return eta * T

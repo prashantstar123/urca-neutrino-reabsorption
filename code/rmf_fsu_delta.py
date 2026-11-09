@@ -117,6 +117,36 @@ def susceptibilities(n, B):
     dn = 2e-3 * n; dYL = ((lambda s: (s[1] + s[2]) / (n + dn))(beta_eq_cont(n + dn, B)) - (lambda s: (s[1] + s[2]) / (n - dn))(beta_eq_cont(n - dn, B))) / (2 * dn)
     kS = n * (state(n * (1 + d), YL, B, g0)[4] - state(n * (1 - d), YL, B, g0)[4]) / (2 * d * n)
     return Bq, Cq, -n ** 2 * Bq * dYL, YL, st0[1], c, ne, nmu, mst, kS
+def state_fixed(n, ne, nmu, B, guess=None):
+    """Baryon sector at fixed n and FIXED lepton densities n_e, n_mu (electron-sector convention, muon fraction held fixed; added 2026-11-08 after Astra
+    round 10). Returns (affinity mu_n - mu_p - mu_e(n_e), pressure incl. leptons, solution). Same field equations as state(); only the lepton sector differs."""
+    pFe = HC * (3 * np.pi ** 2 * ne) ** (1 / 3); mue = np.sqrt(pFe ** 2 + ME ** 2)
+    def mu_of(nm, mun, mup): return {'n': mun, 'p': mup, 'D-': 2 * mun - mup, 'D0': mun, 'D+': mup, 'D++': 2 * mup - mun}[nm]
+    def dens(v):
+        ph, w, r, mun, mup = v; nb = []
+        for (nm, m, t3, q, g, xs, xw, xr, *rest) in B:
+            ms = m - xs * ph; estar = mu_of(nm, mun, mup) - xw * w - xr * I3(t3) * r
+            k = np.sqrt(estar ** 2 - ms ** 2) if estar > ms else 0.0; nb.append(g * k ** 3 / (6 * np.pi ** 2) / HC ** 3)
+        return nb
+    def eqs(v):
+        ph, w, r, mun, mup = v; nb = dens(v); s2, w2, r2 = solve_fields(nb, B)
+        return [(ph - s2) / 10, (w - w2) / 10, (r - r2) / 10, (sum(nb) - n) * 100, (sum(q * ni for ni, (nm, m, t3, q, g, xs, xw, xr, *rest) in zip(nb, B)) - ne - nmu) * 100]
+    if guess is None:
+        c, ne0, nmu0, e0, p0, mu0, mst0, ier0, sol0 = beta_eq_cont(n, B); guess = np.array([sol0[0], sol0[1], sol0[2], sol0[3], sol0[3] - sol0[4]])
+    sol, info, ier, msg = fsolve(eqs, guess, full_output=True, xtol=1e-12, maxfev=4000)
+    if ier != 1: raise RuntimeError(f'state_fixed: {msg}')
+    nb = dens(sol); e, p, *_ = thermo(nb, B, (ne, nmu))
+    return sol[3] - sol[4] - mue, p, sol
+def susceptibilities_fixed(n, B):
+    """Cold susceptibilities with Y_e and Y_mu held fixed separately (the Letter's electron-sector response; DD2 uses finiteT.suscT with the same
+    convention). Same return layout as susceptibilities(): Bq = d(affinity)/d n_e at fixed n, n_mu; Cq = n d(affinity)/dn at fixed Y_e, Y_mu;
+    kS = n dp/dn at fixed Y_e, Y_mu. The legacy susceptibilities() (equilibrated e-mu partition at fixed Y_L) is kept unchanged for the record."""
+    c, ne, nmu, e, p, mu, mst, ier, sol = beta_eq_cont(n, B); YL = (ne + nmu) / n; d = 2e-3
+    g0 = np.array([sol[0], sol[1], sol[2], sol[3], sol[3] - sol[4]]); a0, p0, s0 = state_fixed(n, ne, nmu, B, g0)
+    Bq = (state_fixed(n, ne * (1 + d), nmu, B, s0)[0] - state_fixed(n, ne * (1 - d), nmu, B, s0)[0]) / (2 * d * ne)
+    sp, sm = state_fixed(n * (1 + d), ne * (1 + d), nmu * (1 + d), B, s0), state_fixed(n * (1 - d), ne * (1 - d), nmu * (1 - d), B, s0)
+    Cq = n * (sp[0] - sm[0]) / (2 * d * n); kS = n * (sp[1] - sm[1]) / (2 * d * n)
+    return Bq, Cq, float('nan'), YL, a0, c, ne, nmu, mst, kS
 if __name__ == '__main__':
     lines = []
     for name in SETS:

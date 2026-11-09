@@ -1,0 +1,12 @@
+AH2019 Fig. 6a readings at equal physical density (x_AH = x * 0.149065/0.16) and, for comparison, at equal labels (x_AH = x).
+ DD2 state  | mode           x_AH    | contour crossing temperatures [MeV]                                   | reading
+ 0.5 n0 3.0 | equal_density  0.4658 | outside the plotted map (x_AH < 0.5)
+ 0.5 n0 3.0 | equal_label    0.5000 | 
+ 1.0 n0 4.0 | equal_density  0.9317 | 25:[np.float64(3.60997)]  50:[np.float64(2.46203)]  100:[np.float64(2.24091), np.float64(4.57055)]  1000:[np.float64(1.64542), np.float64(6.88976)]  10000:[np.float64(1.25825)]
+ 1.0 n0 4.0 | equal_label    1.0000 | 25:[np.float64(3.5276)]  50:[np.float64(2.51351), np.float64(3.99905)]  100:[np.float64(2.28746), np.float64(4.51087)]  1000:[np.float64(1.67573), np.float64(6.81097)]  10000:[np.float64(1.2741)]
+ 1.5 n0 4.0 | equal_density  1.3975 | 50:[np.float64(2.82372), np.float64(3.67793)]  100:[np.float64(2.51864), np.float64(4.15697)]  1000:[np.float64(1.84425), np.float64(6.2635)]  10000:[np.float64(9.81288)]
+ 1.5 n0 4.0 | equal_label    1.5000 | 50:[np.float64(2.90931), np.float64(3.5309)]  100:[np.float64(2.57213), np.float64(4.03412)]  1000:[np.float64(1.86785), np.float64(6.03267)]  10000:[np.float64(9.47729)]
+ 2.0 n0 5.0 | equal_density  1.8633 | 100:[np.float64(3.73426)]  1000:[np.float64(1.95148), np.float64(5.59136)]  10000:[np.float64(8.88445)]
+ 2.0 n0 5.0 | equal_label    2.0000 | 100:[np.float64(3.64655)]  1000:[np.float64(1.98471), np.float64(5.48083)]  10000:[np.float64(8.71879)]
+ 3.0 n0 5.0 | equal_density  2.7950 | 1000:[np.float64(2.12959), np.float64(4.66445)]  10000:[np.float64(1.60071)]
+ 3.0 n0 5.0 | equal_label    3.0000 | 1000:[np.float64(2.14253), np.float64(4.52206)]  10000:[np.float64(1.60667), np.float64(6.92877)]
